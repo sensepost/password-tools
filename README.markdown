@@ -25,6 +25,10 @@ I've added a progress bar from Gerd Riesselmann, and a key for guidance. I've al
 
 There are two versions provided, one which displays the results of the entropy calculations, and one which does not (user's rarely care).
 
+###4.1.1 Alternative
+
+howsecureismypassword.net provides a nice, more detailed password strength checker. A somewhat modified version with alerts for corporate complexity requirements, common corporate password bases, and an informational alert if a password contains a common password is included. This is with the permission of the developer, Small Hadron Collider, who should get all the credit.
+
 ##4.2 Password Generators
 
 There are three password generators, each with a different audience in mind.
