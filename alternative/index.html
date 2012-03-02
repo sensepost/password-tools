@@ -1,0 +1,130 @@
+<!doctype html>
+
+<html lang="en" dir="ltr" id="www-howsecureismypassword-net" class="no-js">
+
+	<head>
+
+		<meta charset="utf-8" />
+
+		<title>How Secure Is My Password?</title>
+		<meta name="description" content="Find out how long it would take a desktop PC to hack your password." />
+		<meta name="author" content="Small Hadron Collider" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="shortcut icon" href="supporting/images/favicon.ico" />
+		<link rel="stylesheet" href="supporting/css/css.css" />
+
+		<script src="supporting/js/modernizr.js"></script>
+
+	</head>
+
+	<body>
+
+		<h1 data-translate="title" class="translate">How Secure Is My Password?</h1>
+		<article id="no-script">
+			<p>Unfortunately, for security reasons, this site can only run if you have JavaScript enabled. JavaScript is a "client-side" language, which means the code runs on your computer and nothing you type in ever leaves your computer.</p>
+			<p>You may be able to <a href="http://www.google.com/adsense/support/bin/answer.py?answer=12654">turn on JavaScript in your browser's preferences</a>.</p>
+		</article>
+
+		<script>
+			document.body.removeChild(document.getElementById('no-script'));
+		</script>
+		<script src="supporting/js/hsimp.js"></script>
+		<!--<script id="language-pack" src="/translations/en.js"></script> -->
+		<script src="supporting/js/dictionary.js"></script>
+
+		<script>
+
+			// Anonymous self-initialised starter function
+			(function (d) {
+
+				var input = d.createElement('input'),
+					//calcs = d.createElement('input'),
+					result = d.createElement('p'),
+					warnings = d.createElement('ul'),
+					removeChildren = function (node) {
+						if (node.hasChildNodes()){
+							while (node.childNodes.length >= 1) {
+								node.removeChild(node.firstChild);
+							}
+						}
+					},
+					change = function () {
+
+						var cps = HSIMP.convertToNumber('250000000'),
+							password = input.value,
+							time, i, checks;
+
+						warnings.innerHTML = '';
+
+						if(password) {
+							time = HSIMP.time(password, cps.numeric);
+							time = HSIMP.timeInPeriods(time);
+
+							if (time.period === 'seconds') {
+								if (time.time < 0.000001) {
+									result.innerHTML = 'Your password would be hacked<br /><span>Instantly</span>';
+								} else if (time.time < 1) {
+									result.innerHTML = 'It would take a desktop PC<br /><span>' + time.time+' '+time.period+ '</span><br/>to hack your password (unless it\'s easy to guess, see below)';
+								} else {
+									result.innerHTML = 'It would take a desktop PC<br /><span>About ' + time.time+' '+time.period+ '</span><br/>to hack your password (unless it\'s easy to guess, see below)';
+								}
+							} else {
+
+								result.innerHTML = 'It would take a desktop PC<br /><span>About ' + time.time+' '+time.period+ '</span><br/>to hack your password (unless it\'s easy to guess, see below)';
+							}
+
+							checks = HSIMP.check(password);
+							HSIMP.formatChecks(checks.results, warnings);
+
+							if (checks.insecure) {
+								result.innerHTML = '';
+							}
+
+						} else {
+							result.innerHTML = '';
+						}
+					};
+
+				input.setAttribute('type', 'password');
+				input.setAttribute('id', 'password');
+				input.setAttribute('maxlength', '60');
+				warnings.setAttribute('id', 'warnings');
+				result.setAttribute('id', 'result');
+
+				d.body.appendChild(input);
+				d.body.appendChild(result);
+				d.body.appendChild(warnings);
+
+				input.focus();
+
+				if (input.addEventListener){
+					input.addEventListener('keyup', change, false);
+				} else if (input.attachEvent){
+					input.attachEvent('onkeyup', change);
+				}
+
+			}(document));
+
+		</script>
+
+		<footer>
+			<div style="float:left;">
+				<h2 align="left">Key</h2>
+				<p align="left">
+				<img src="supporting/images/delete.png" alt="Insecure" /> Insecure password.<br />
+				<img src="supporting/images/error.png" alt="Warning" /> Warning, insecure elements.<br />
+				<img src="supporting/images/information.png" alt="Advice" /> Advice.<br />
+				<img src="supporting/images/lock.png" alt="Good" /> Good elements.<br />
+				</p>
+			</div>
+			<div style="float:right;">
+				<p align="right" ><span data-translate="created" class="translate">Created by</span> <a href="http://www.smallhadroncollider.com/" title="Small Hadron Collider: Web Development (Bristol)">Small Hadron Collider</a> &middot; <span data-translate="follow" class="translate">Follow on</span>: <a data-translate="twitter" class="translate" href="http://twitter.com/smallhadron/">Twitter</a> / <a data-translate="facebook" class="translate" href="http://www.facebook.com/smallhadroncollider/">Facebook</a></p>
+				<p align="right" ><span data-translate="created" class="translate">Customised by</span> <a href="http://www.sensepost.com/" title="SensePost">SensePost</a> &middot; Original site <a href="http://howsecureismypassword.net" title="How Secure Is My Password">here</a></p>
+				<p align="right" ><span data-translate="top-passwords" class="translate">Top Passwords by</span> <a href="http://xato.net/passwords/more-top-worst-passwords">Xato</a> &middot; <span data-translate="icons" class="translate">Icons by</span> <a href="http://www.famfamfam.com/lab/icons/silk/">Fam Fam</a> &middot; <span data-translate="typeface" class="translate">Font by</span> <a href="http://www.theleagueofmoveabletype.com/fonts/7-league-gothic">The League of Movable Type</a></p>
+		</div>
+		</footer>
+
+	</body>
+</html>
